@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,27 +20,30 @@ namespace Business.Concrete
 
         public IResult Add(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDal.Add(customer);
+            return new SuccessResult(Messages.CustomerAdded);
         }
 
         public IResult Delete(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDal.Delete(customer);
+            return new SuccessResult(Messages.CustomerDeleted);
         }
 
         public IDataResult<List<Customer>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), Messages.CustomerListed);
         }
 
         public IDataResult<Customer> GetById(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Customer>(_customerDal.Get(cus => cus.CustomerId == id));
         }
 
         public IResult Update(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDal.Update(customer);
+            return new SuccessResult(Messages.CustomerUpdated);
         }
     }
 }
